@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" data-font-size="normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CareSetu - Digital Health Passport | Patient Health Story Bridge</title>
+  <meta name="description" content="CareSetu is a patient-only health history and medical document organisation app bridging My Health Story with My Doctor for General Medicine and Ayurveda.">
+
+  <!-- Google Fonts: Outfit (Brand & Headings) + Inter (Readable UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Outer Desktop Frame Control Bar (Visible on desktop monitors) -->
+  <aside class="desktop-controls-bar" aria-label="Prototype Viewport Controls">
+    <div style="font-weight: 700; color: var(--primary-dark); font-size: 0.84rem;">
+      CareSetu Mobile Prototype
+    </div>
+    <div class="mode-pills">
+      <button id="btnModePhone" class="mode-pill-btn active" title="View as Mobile Phone Frame">📱 Mobile</button>
+      <button id="btnModeFull" class="mode-pill-btn" title="Expand Viewport Container">🖥️ Expanded</button>
+    </div>
+    <div>
+      <select id="demoProfileSelect" style="font-size: 0.78rem; padding: 3px 6px; border-radius: 6px; border: 1px solid var(--border-card); background: #FFF; color: var(--text-primary);">
+        <option value="ramesh">Case 1: Ramesh (GenMed • 58M)</option>
+        <option value="sunita">Case 2: Sunita Devi (Ayurveda • 62F)</option>
+        <option value="new">➕ Start Fresh Patient Intake</option>
+      </select>
+    </div>
+  </aside>
+
+  <!-- ====================================================================
+       MOBILE APP CONTAINER
+       ==================================================================== -->
+  <div class="app-container" id="appContainer">
+
+    <!-- Phone Status Bar -->
+    <div class="phone-status-bar">
+      <span>9:41 AM</span>
+      <div class="phone-notch"></div>
+      <span>📶 5G 🔋 98%</span>
+    </div>
+
+    <!-- Top Universal Accessibility Bar (Elderly & Low-Literacy Support) -->
+    <header class="top-accessibility-header">
+      <button id="langSwitchBtn" class="btn-lang-switch" title="Toggle Language between English and Hindi">
+        <span>🌐 हिंदी में देखें</span>
+      </button>
+
+      <div class="accessibility-controls">
+        <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted);">Text:</span>
+        <button class="btn-font-size" data-size="normal" title="Normal Font Size" style="font-weight: 900; border-color: var(--primary);">A</button>
+        <button class="btn-font-size" data-size="large" title="Large Font Size for Easy Reading">A+</button>
+        <button class="btn-font-size" data-size="xlarge" title="Extra Large Font Size">A++</button>
+      </div>
+    </header>
+
+    <!-- Brand Header -->
+    <div class="app-brand-bar">
+      <div class="brand-identity">
+        <div class="brand-icon-wrap" title="CareSetu - Health Bridge">
+          <!-- Bridge SVG Icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18h18" />
+            <path d="M4 18v-5a7 7 0 0 1 14 0v5" />
+            <path d="M10 18v-6" />
+            <path d="M14 18v-6" />
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">CareSetu</div>
+          <div class="brand-subtitle" data-i18n="brandTagline">“My Health Story ➔ My Doctor”</div>
+        </div>
+      </div>
+
+      <!-- Emergency SOS Trigger Button (Strictly Red only for Emergency) -->
+      <button id="btnEmergencySos" class="emergency-sos-btn" data-i18n="emergencySos">
+        🚨 SOS
+      </button>
+    </div>
+
+    <!-- ====================================================================
+         SCROLLABLE CONTENT AREA
+         ==================================================================== -->
+    <main class="app-scroll-content">
+
+      <!-- ================================================================
+           SCREEN 1: DIGITAL HEALTH PASSPORT (HOME)
+           ================================================================ -->
+      <section id="view-passport" class="view-container active">
+
+        <!-- Visual Bridge Component: "My Health Story" 🌉 "My Doctor" -->
+        <div class="bridge-banner-card">
+          <div class="bridge-visual-flow">
+            <div class="bridge-node">
+              <div class="bridge-node-icon">📖</div>
+              <div class="bridge-node-label" data-i18n="bridgeStory">My Health Story</div>
+            </div>
+
+            <div class="bridge-span">
+              <div class="bridge-arch">
+                <div class="bridge-line"></div>
+                <div class="bridge-center-badge">CareSetu 🌉</div>
+              </div>
+            </div>
+
+            <div class="bridge-node">
+              <div class="bridge-node-icon">🩺</div>
+              <div class="bridge-node-label" data-i18n="bridgeDoctor">My Doctor</div>
+            </div>
+          </div>
+
+          <div class="bridge-status-text" id="bridgeStatusText">
+            🌉 Bridge Active: Your health story is structured and ready for your doctor
+          </div>
+        </div>
+
+        <!-- Digital Health Passport Identification Card -->
+        <div class="passport-card">
+          <div class="passport-header-strip">
+            <div class="passport-seal">
+              <span>🛡️</span>
+              <span data-i18n="passportTitle">DIGITAL HEALTH PASSPORT</span>
+            </div>
+            <div class="passport-id-badge" id="passportIdVal">CS-9842-DL</div>
+          </div>
+
+          <div class="passport-profile-main">
+            <div class="passport-avatar" id="passportAvatar">👤</div>
+            <div class="passport-identity">
+              <div class="passport-name" id="passportNameVal">Ramesh Chandra Sharma</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px;" id="passportAgeGenderVal">
+                58 yrs • Male
+              </div>
+
+              <div class="passport-meta-grid">
+                <span class="meta-chip blood">🩸 <span data-i18n="bloodGroup">Blood</span>: <strong id="passportBloodVal">B+</strong></span>
+                <span id="passportTrackBadge" class="meta-chip" style="background: #DBEAFE; color: #1E40AF;">🩺 GenMed Track</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px; font-size: 0.78rem; color: var(--text-secondary); border-top: 1px solid var(--border-card); padding-top: 8px;">
+            📞 <strong data-i18n="emergencyContact">Emergency Contact:</strong> <span id="passportContactVal">Suresh (Son): +91 98765 43210</span>
+          </div>
+
+          <!-- Known Allergies Warning Banner (Orange Alert) -->
+          <div class="warning-alert-card">
+            <div class="warning-icon">⚠️</div>
+            <div>
+              <div class="warning-title" data-i18n="allergiesWarning">Known Allergies & Drug Alerts</div>
+              <div class="warning-desc" id="passportAllergiesVal">Penicillin (Severe rash & facial swelling)</div>
+            </div>
+          </div>
+
+          <!-- Audio Read Aloud for Low-Literacy / Elderly -->
+          <div style="margin-top: 12px; display: flex; justify-content: flex-end;">
+            <button id="btnAudioPassport" class="btn-audio-guide" data-i18n="tapToListen">
+              🔊 Tap to Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Health Actions (Large Touch Friendly Rounded Cards) -->
+        <div class="section-heading-row">
+          <div class="section-title">
+            <span>⚡</span>
+            <span data-i18n="quickActions">Quick Health Actions</span>
+          </div>
+        </div>
+
+        <div class="card-action-grid">
+          <!-- Action 1: General Medicine Check-in -->
+          <button class="action-card genmed" data-target-view="symptoms" data-track="General Medicine">
+            <div class="action-card-icon">🩺</div>
+            <div>
+              <div class="action-card-title" data-i18n="genMedAction">General Medicine Check-in</div>
+              <div class="action-card-desc" data-i18n="genMedDesc">Fever, cough, body pain, sugar, BP & daily pills</div>
+            </div>
+          </button>
+
+          <!-- Action 2: Ayurveda & Lifestyle Profile -->
+          <button class="action-card ayurveda" data-target-view="symptoms" data-track="Ayurveda">
+            <div class="action-card-icon">🌿</div>
+            <div>
+              <div class="action-card-title" data-i18n="ayurAction">Ayurveda & Lifestyle Profile</div>
+              <div class="action-card-desc" data-i18n="ayurDesc">Digestion (Agni), sleep, bowel habits & dosha balance</div>
+            </div>
+          </button>
+
+          <!-- Action 3: Document Locker -->
+          <button class="action-card docs" data-target-view="documents">
+            <div class="action-card-icon">📁</div>
+            <div>
+              <div class="action-card-title" data-i18n="docsAction">Medical Document Locker</div>
+              <div class="action-card-desc" data-i18n="docsDesc">Old prescriptions, blood tests & scan reports</div>
+            </div>
+          </button>
+
+          <!-- Action 4: Draft Doctor Summary -->
+          <button class="action-card summary" data-target-view="summary">
+            <div class="action-card-icon" style="background: rgba(255,255,255,0.2); color: #FFF; margin-bottom: 0; margin-right: 12px;">📋</div>
+            <div style="flex: 1;">
+              <div class="action-card-title" data-i18n="summaryAction">Draft Doctor Summary</div>
+              <div class="action-card-desc" data-i18n="summaryDesc">Generate 1-page health bridge card for your doctor</div>
+            </div>
+            <div style="font-size: 1.4rem; color: #5EEAD4;">➔</div>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- ================================================================
+           SCREEN 2: RECORD HEALTH STORY (SYMPTOMS & INTAKE)
+           ================================================================ -->
+      <section id="view-symptoms" class="view-container">
+
+        <!-- Top Navigation Bar -->
+        <div class="flow-top-bar">
+          <button class="btn-back-circle" data-back="passport">‹</button>
+          <div class="flow-title-wrap">
+            <h2 class="flow-title" data-i18n="symptomsHeader">Record My Health Story</h2>
+            <div class="flow-subtitle" data-i18n="symptomsSub">Answer in simple steps or speak in your voice</div>
+          </div>
+          <button id="btnAudioSymptoms" class="btn-audio-guide" data-i18n="tapToListen">
+            🔊 Listen
+          </button>
+        </div>
+
+        <!-- Specialty Track Switcher -->
+        <div class="track-toggle-container">
+          <button id="tabTrackGenMed" class="track-btn active genmed">
+            <span>🩺</span>
+            <span>General Medicine (Allopathy)</span>
+          </button>
+          <button id="tabTrackAyur" class="track-btn">
+            <span>🌿</span>
+            <span>Ayurveda (AYUSH)</span>
+          </button>
+        </div>
+
+        <!-- SECTION A: GENERAL MEDICINE INTAKE -->
+        <div id="sectionGenMedIntake">
+          
+          <!-- 1. Pictorial Common Symptoms Grid -->
+          <div class="question-card">
+            <div class="question-header">
+              <div class="question-title">
+                <span>🌡️</span>
+                <span data-i18n="chiefComplaints">What are you feeling today?</span>
+              </div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px;" data-i18n="tapSymptoms">
+              Tap common symptoms to add:
+            </div>
+
+            <div class="symptom-tiles-grid">
+              <div class="symptom-tile" data-symptom="Fever & Chills">
+                <span class="symptom-tile-icon">🤒</span>
+                <span class="symptom-tile-label" data-i18n="fever">Fever & Chills</span>
+              </div>
+              <div class="symptom-tile" data-symptom="Cough & Cold">
+                <span class="symptom-tile-icon">🤧</span>
+                <span class="symptom-tile-label" data-i18n="cough">Cough & Cold</span>
+              </div>
+              <div class="symptom-tile" data-symptom="Headache / Body Pain">
+                <span class="symptom-tile-icon">🤕</span>
+                <span class="symptom-tile-label" data-i18n="headache">Headache / Body Pain</span>
+              </div>
+              <div class="symptom-tile" data-symptom="Stomach Ache / Gas">
+                <span class="symptom-tile-icon">🤢</span>
+                <span class="symptom-tile-label" data-i18n="stomach">Stomach Ache / Gas</span>
+              </div>
+              <div class="symptom-tile" data-symptom="Tiredness & Weakness">
+                <span class="symptom-tile-icon">🥱</span>
+                <span class="symptom-tile-label" data-i18n="fatigue">Tiredness & Weakness</span>
+              </div>
+              <div class="symptom-tile" data-symptom="Chest / Breathing issue">
+                <span class="symptom-tile-icon">🫁</span>
+                <span class="symptom-tile-label" data-i18n="chest">Chest / Breathing</span>
+              </div>
+              <div class="symptom-tile" data-symptom="Sugar / BP Check">
+                <span class="symptom-tile-icon">🩸</span>
+                <span class="symptom-tile-label" data-i18n="sugarBp">Sugar / BP Check</span>
+              </div>
+              <div class="symptom-tile" data-symptom="Joint Pain / Stiffness">
+                <span class="symptom-tile-icon">🦴</span>
+                <span class="symptom-tile-label" data-i18n="jointPain">Joint Pain / Stiffness</span>
+              </div>
+              <div class="symptom-tile" data-symptom="Skin Allergy / Rash">
+                <span class="symptom-tile-icon">🩹</span>
+                <span class="symptom-tile-label" data-i18n="skinRash">Skin Allergy / Rash</span>
+              </div>
+            </div>
+
+            <!-- Severity Scale Slider -->
+            <div class="severity-scale-wrap" style="margin-top: 14px; border-top: 1px dashed var(--border-card); padding-top: 12px;">
+              <div class="severity-levels-row">
+                <span data-i18n="severityLabel">How uncomfortable does it feel?</span>
+                <strong id="valStorySeverity" style="color: var(--warning-orange);">Moderate</strong>
+              </div>
+              <input type="range" min="1" max="3" value="2" class="slider-custom" id="inputStorySeverity">
+              <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">
+                <span>🟢 Mild</span>
+                <span>🟡 Moderate</span>
+                <span>🔴 Severe</span>
+              </div>
+            </div>
+
+            <!-- Duration Picker -->
+            <div style="margin-top: 14px; display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 0.82rem; font-weight: 700;" data-i18n="durationLabel">Since how long?</span>
+              <input type="number" id="inputStoryDurationVal" min="1" max="365" value="4" style="width: 60px; padding: 6px; border: 1.5px solid var(--border-card); border-radius: 6px; font-size: 0.88rem; text-align: center;">
+              <select id="inputStoryDurationUnit" style="padding: 6px; border: 1.5px solid var(--border-card); border-radius: 6px; font-size: 0.88rem; background: #FFF;">
+                <option value="Days">Days (दिन)</option>
+                <option value="Weeks">Weeks (हफ्ते)</option>
+                <option value="Months">Months (महीने)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 2. Voice Dictation & Spoken Notes -->
+          <div class="voice-dictation-wrap">
+            <div style="font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;" data-i18n="speakStory">
+              Or tap to speak your symptoms:
+            </div>
+            <button id="btnRecordStoryVoice" class="btn-mic-large" title="Tap to Speak">
+              🎤
+            </button>
+            <div class="voice-status-text" id="voiceMicStatusText" data-i18n="micPrompt">
+              Tap microphone and speak in Hindi or English
+            </div>
+
+            <div class="soundwave-bars">
+              <div class="soundwave-bar"></div>
+              <div class="soundwave-bar"></div>
+              <div class="soundwave-bar"></div>
+              <div class="soundwave-bar"></div>
+              <div class="soundwave-bar"></div>
+            </div>
+
+            <textarea id="storyFreeNotes" class="form-textarea" style="margin-top: 10px;" placeholder="Spoken or written details will appear here..."></textarea>
+          </div>
+
+          <!-- 3. Regular Daily Medicines Recorder (Recording Only - No Prescribing) -->
+          <div class="question-card">
+            <div class="question-header">
+              <div class="question-title">
+                <span>💊</span>
+                <span data-i18n="regularMedsLabel">Medicines You Take Regularly</span>
+              </div>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 10px;">
+              Recording only. CareSetu does not prescribe or suggest medicines.
+            </div>
+
+            <div id="regularMedsList">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <button id="btnAddRegularMed" class="btn-secondary" style="width: 100%; margin-top: 8px;" data-i18n="addMedBtn">
+              + Record a medicine
+            </button>
+          </div>
+
+        </div>
+
+        <!-- SECTION B: AYURVEDA & LIFESTYLE INTAKE (AYUSH) -->
+        <div id="sectionAyurIntake" style="display: none;">
+          
+          <div class="question-card" style="border-color: var(--ayur-border); background: linear-gradient(180deg, #FFF 0%, var(--ayur-light) 100%);">
+            <div class="question-header">
+              <div class="question-title" style="color: var(--ayur-dark);">
+                <span>🌿</span>
+                <span data-i18n="ayurHeader">Ayurveda & Lifestyle Intake</span>
+              </div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--ayur-dark); margin-bottom: 10px;" data-i18n="ayurSub">
+              Holistic observation of digestion, sleep & daily routine
+            </div>
+
+            <!-- Agni (Digestion) -->
+            <div style="margin-bottom: 14px;">
+              <strong style="font-size: 0.84rem; color: var(--text-primary);" data-i18n="agniLabel">Digestion & Appetite (Agni)</strong>
+              <div class="ayur-option-cards">
+                <div class="ayur-select-card" data-group="agni" data-value="Samagni">
+                  <span class="ayur-card-icon">🥣</span>
+                  <span class="ayur-card-name">Samagni</span>
+                  <span class="ayur-card-sub" data-i18n="agniBalanced">Good digestion, timely hunger</span>
+                </div>
+                <div class="ayur-select-card" data-group="agni" data-value="Mandagni">
+                  <span class="ayur-card-icon">🐢</span>
+                  <span class="ayur-card-name">Mandagni</span>
+                  <span class="ayur-card-sub" data-i18n="agniLow">Heavy, sluggish, slow appetite</span>
+                </div>
+                <div class="ayur-select-card" data-group="agni" data-value="Tikshnagni">
+                  <span class="ayur-card-icon">🔥</span>
+                  <span class="ayur-card-name">Tikshnagni</span>
+                  <span class="ayur-card-sub" data-i18n="agniSharp">Acidity, burning, sharp hunger</span>
+                </div>
+                <div class="ayur-select-card selected" data-group="agni" data-value="Vishamagni">
+                  <span class="ayur-card-icon">💨</span>
+                  <span class="ayur-card-name">Vishamagni</span>
+                  <span class="ayur-card-sub" data-i18n="agniIrregular">Gas, bloating, irregular hunger</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bowel Habits (Koshtha) -->
+            <div style="margin-bottom: 14px;">
+              <strong style="font-size: 0.84rem; color: var(--text-primary);" data-i18n="bowelLabel">Bowel Habits (Koshtha)</strong>
+              <div class="ayur-option-cards">
+                <div class="ayur-select-card" data-group="koshtha" data-value="Regular">
+                  <span class="ayur-card-icon">🌱</span>
+                  <span class="ayur-card-name">Regular</span>
+                  <span class="ayur-card-sub" data-i18n="bowelNormal">Easy daily evacuation</span>
+                </div>
+                <div class="ayur-select-card selected" data-group="koshtha" data-value="Hard">
+                  <span class="ayur-card-icon">🧱</span>
+                  <span class="ayur-card-name">Constipated</span>
+                  <span class="ayur-card-sub" data-i18n="bowelConstipated">Hard stool, straining</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sleep Quality -->
+            <div style="margin-bottom: 14px;">
+              <strong style="font-size: 0.84rem; color: var(--text-primary);" data-i18n="sleepLabel">Sleep Quality</strong>
+              <div class="ayur-option-cards">
+                <div class="ayur-select-card" data-group="sleep" data-value="Deep">
+                  <span class="ayur-card-icon">🌙</span>
+                  <span class="ayur-card-name">Deep & Sound</span>
+                  <span class="ayur-card-sub" data-i18n="sleepDeep">Refreshing 7-8 hours</span>
+                </div>
+                <div class="ayur-select-card selected" data-group="sleep" data-value="Disturbed">
+                  <span class="ayur-card-icon">⚡</span>
+                  <span class="ayur-card-name">Disturbed / Light</span>
+                  <span class="ayur-card-sub" data-i18n="sleepDisturbed">Waking up often</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Prakriti Indicators -->
+            <div>
+              <strong style="font-size: 0.84rem; color: var(--text-primary);" data-i18n="doshaLabel">Body Tendencies (Prakriti Indicators)</strong>
+              <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 6px;">
+                <div class="ayur-select-card dosha-card selected" data-value="Vata: Dry skin, joint stiffness, restless sleep">
+                  <span class="ayur-card-name">💨 Vata Tendency</span>
+                  <span class="ayur-card-sub" data-i18n="vataTrait">Prone to dry skin, joint stiffness, restless mind</span>
+                </div>
+                <div class="ayur-select-card dosha-card" data-value="Pitta: Heat sensitivity, acidity, sweating">
+                  <span class="ayur-card-name">🔥 Pitta Tendency</span>
+                  <span class="ayur-card-sub" data-i18n="pittaTrait">Prone to body heat, sweating, acidity, irritability</span>
+                </div>
+                <div class="ayur-select-card dosha-card selected" data-value="Kapha: Morning lethargy & heaviness">
+                  <span class="ayur-card-name">💧 Kapha Tendency</span>
+                  <span class="ayur-card-sub" data-i18n="kaphaTrait">Prone to mucus, lethargy, water retention, heaviness</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Save Story Button -->
+        <div style="margin-top: 16px; margin-bottom: 12px;">
+          <button id="btnSaveHealthStory" class="btn-primary" style="width: 100%;" data-i18n="saveStoryBtn">
+            Save My Health Story ➔
+          </button>
+        </div>
+
+      </section>
+
+      <!-- ================================================================
+           SCREEN 3: MEDICAL DOCUMENT LOCKER
+           ================================================================ -->
+      <section id="view-documents" class="view-container">
+
+        <!-- Top Bar -->
+        <div class="flow-top-bar">
+          <button class="btn-back-circle" data-back="passport">‹</button>
+          <div class="flow-title-wrap">
+            <h2 class="flow-title" data-i18n="docsHeader">Medical Document Locker</h2>
+            <div class="flow-subtitle" data-i18n="docsSub">Keep all previous hospital papers and reports safe</div>
+          </div>
+          <button id="btnAudioDocuments" class="btn-audio-guide" data-i18n="tapToListen">
+            🔊 Listen
+          </button>
+        </div>
+
+        <!-- Upload Trigger Dropzone -->
+        <div class="doc-upload-dropzone" id="docUploadDropzone">
+          <input type="file" id="hiddenDocFileInput" accept="image/*,application/pdf" style="display: none;">
+          <div style="font-size: 2.4rem; margin-bottom: 6px;">📸 📄</div>
+          <div style="font-weight: 700; color: var(--primary-dark); font-size: 0.95rem;" data-i18n="uploadPrompt">
+            Tap to take photo of prescription or report
+          </div>
+          <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;" data-i18n="uploadSub">
+            Supports photos, camera scans or PDFs
+          </div>
+        </div>
+
+        <!-- Attached Documents List -->
+        <div class="section-heading-row">
+          <div class="section-title">
+            <span>🗂️</span>
+            <span data-i18n="recentDocs">Attached Health Records</span>
+          </div>
+        </div>
+
+        <div id="docListContainer" class="doc-list-grid">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </section>
+
+      <!-- ================================================================
+           SCREEN 4: DOCTOR-READY SUMMARY ("THE HEALTH BRIDGE")
+           ================================================================ -->
+      <section id="view-summary" class="view-container">
+
+        <!-- Top Bar -->
+        <div class="flow-top-bar">
+          <button class="btn-back-circle" data-back="passport">‹</button>
+          <div class="flow-title-wrap">
+            <h2 class="flow-title" data-i18n="summaryDoctorHeader">Draft Health Story for Doctor</h2>
+            <div class="flow-subtitle">Ready to present or download as PDF</div>
+          </div>
+          <button id="btnRegenSummary" class="btn-secondary" style="padding: 6px 10px; font-size: 0.78rem;" title="Refresh Summary">
+            🔄 Refresh
+          </button>
+        </div>
+
+        <!-- The Structured Clinical Sheet -->
+        <div id="doctorSummarySheet" class="summary-doctor-sheet">
+          <!-- Rendered dynamically by SummaryModule -->
+        </div>
+
+        <!-- Action Buttons (Show Doctor, Print/PDF, Audio) -->
+        <div class="presentation-actions-row">
+          <button id="btnShowDoctorMode" class="btn-primary" data-i18n="btnShowDoctor">
+            📱 Show to Doctor Mode
+          </button>
+          <button id="btnPrintPdfSummary" class="btn-secondary" data-i18n="btnDownloadPdf">
+            📥 Download / Print PDF
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 8px;">
+          <button id="btnReadAloudSummary" class="btn-secondary" style="flex: 1;" data-i18n="btnReadSummary">
+            🔊 Read Aloud to Me
+          </button>
+          <button id="btnEditFromSummary" class="btn-secondary" style="flex: 1;" data-i18n="btnEditStory">
+            ✏️ Edit Health Story
+          </button>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- ====================================================================
+         FIXED BOTTOM NAVIGATION DOCK
+         ==================================================================== -->
+    <nav class="bottom-nav-dock" aria-label="Main Navigation">
+      <button class="nav-dock-item active" data-view="passport">
+        <span class="nav-icon">🛡️</span>
+        <span data-i18n="navPassport">Passport</span>
+      </button>
+
+      <button class="nav-dock-item" data-view="symptoms">
+        <span class="nav-icon">📖</span>
+        <span data-i18n="navStory">Health Story</span>
+      </button>
+
+      <button class="nav-dock-item" data-view="documents">
+        <span class="nav-icon">📁</span>
+        <span data-i18n="navDocs">Documents</span>
+      </button>
+
+      <button class="nav-dock-item" data-view="summary">
+        <span class="nav-icon">📋</span>
+        <span data-i18n="navSummary">Doctor Summary</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- ====================================================================
+       MODAL 1: EMERGENCY SOS HELPLINE (Red Only for True Emergencies)
+       ==================================================================== -->
+  <div id="emergencySosModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #FFF; border-radius: 20px; max-width: 380px; width: 100%; padding: 20px; text-align: center; border: 3px solid var(--emergency-red); box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);">
+      <div style="font-size: 3rem; margin-bottom: 8px;">🚨</div>
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--emergency-red); margin-bottom: 6px;" data-i18n="emergencyTitle">
+        Emergency Medical Helplines
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.4;" data-i18n="emergencyText">
+        If you are experiencing severe chest pain, sudden paralysis, choking, or heavy bleeding, seek emergency medical care immediately.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="tel:108" style="text-decoration: none; background: var(--emergency-red); color: #FFF; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px;" data-i18n="ambulanceCall">
+          📞 Call Ambulance: 108
+        </a>
+        <a href="tel:112" style="text-decoration: none; background: #991B1B; color: #FFF; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px;" data-i18n="nationalEmergency">
+          📞 National Emergency: 112
+        </a>
+        <button id="btnCloseSosModal" style="background: var(--bg-subtle); border: 1px solid var(--border-card); padding: 10px; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 4px;" data-i18n="closeBtn">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL 2: FULLSCREEN DOCTOR PRESENTATION MODE
+       (High-contrast clean 30-second glance for handing phone to doctor)
+       ==================================================================== -->
+  <div id="doctorPresentationModal" class="doctor-presentation-modal">
+    <div class="doctor-pres-banner">
+      <div>
+        <strong style="font-size: 1rem;">👨‍⚕️ Doctor Review Mode</strong>
+        <div style="font-size: 0.74rem; opacity: 0.85;">High-contrast view for clinical consultation</div>
+      </div>
+      <button id="btnCloseDoctorPres" style="background: rgba(255,255,255,0.2); border: none; color: #FFF; border-radius: 6px; padding: 6px 12px; font-weight: 700; cursor: pointer;">
+        ✕ Exit Mode
+      </button>
+    </div>
+    <div id="doctorPresentationContent" style="max-width: 600px; margin: 0 auto;"></div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL 3: DOCUMENT PREVIEW MODAL
+       ==================================================================== -->
+  <div id="docPreviewModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9990; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #FFF; border-radius: 20px; max-width: 400px; width: 100%; padding: 20px; box-shadow: var(--shadow-lg);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <div>
+          <h3 id="docPreviewTitle" style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Document Preview</h3>
+          <div id="docPreviewMeta" style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;"></div>
+        </div>
+        <button id="btnCloseDocPreview" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted);">✕</button>
+      </div>
+      <div id="docPreviewBody"></div>
+    </div>
+  </div>
+
+  <!-- Core JavaScript Modules -->
+  <script src="js/i18n.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/passport.js"></script>
+  <script src="js/symptoms.js"></script>
+  <script src="js/documents.js"></script>
+  <script src="js/summary.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
